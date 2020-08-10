@@ -31,3 +31,15 @@
 .WaveSpinner {
 
 }
+
+@media (max-width: 1080px) {
+    :root {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 760px) {
+    :root {
+        font-size: 12px;
+    }
+}
