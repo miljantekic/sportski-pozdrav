@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 import './App.css';
 
@@ -31,6 +32,7 @@ class App extends Component {
             emojis,
             inProgress: true,
             currentEmoji: 0,
+            copied: false,
         };
     }
 
@@ -51,22 +53,39 @@ class App extends Component {
             });
         }, 80);
 
-        console.log(interval);
-
         setTimeout(() => {
             clearInterval(interval);
-        }, _.random(1000, 1500))
+            this.setState({
+                inProgress: false,
+            })
+        }, _.random(1000, 1500));
+    }
+
+    handleCopy = () => {
+        this.setState({
+            copied: true,
+        });
     }
 
     render() {
-        const {emojis, currentEmoji} = this.state;
+        const {emojis, currentEmoji, inProgress, copied} = this.state;
 
         return <div className="PozdravApp">
-            <div className="SlotSpinner SpinnerSide">
-                <span  role="img" aria-label="sportski">{emojis[currentEmoji]}</span>
-            </div>
-            <div className="WaveSpinner SpinnerSide">
-                <span role="img" aria-label="pozdrav">👋</span>
+            <div className="SpinnersWrapper">
+                <div className="SlotSpinner SpinnerSide">
+                    <span  role="img" aria-label="sportski">{emojis[currentEmoji]}</span>
+                </div>
+                <div className="WaveSpinner SpinnerSide">
+                    <span role="img" aria-label="pozdrav">👋</span>
+                </div>
+                {!inProgress && <div className="AdditionalActions">
+                    <CopyToClipboard text={`${emojis[currentEmoji]} 👋\n> Powered by sportskipozdrav.rs`} onCopy={this.handleCopy}>
+                        <button className="CopyButton">
+                            <span>Copy to Cliboard</span>
+                        </button>
+                    </CopyToClipboard>
+                    {copied && <div className="CopiedText">Copied</div>}
+                </div>}
             </div>
         </div>
     }

@@ -14,6 +14,41 @@
     width: 100vw;
 }
 
+.SpinnersWrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.AdditionalActions {
+    width: 200px;
+    position: absolute;
+    top: 100%;
+    left: calc(50% - 100px);
+}
+
+.CopyButton {
+    width: 100%;
+    display: block;
+    background: #ffce34;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.CopyButton:hover {
+    background: #fac205;
+}
+
+.CopiedText {
+text-align: center;
+    margin-top: 10px;
+    color: #12c62f;
+}
+
 .SpinnerSide {
     font-size: 10rem;
     padding: 2rem 4rem;
